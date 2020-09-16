@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Plus2OutOfIndEx
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] number = { 2, 1, 3, 4, 1 };
+            //int[] number = { 5,0,2,7 };
+
+            Solution sol = new Solution();
+            //Console.WriteLine(sol.solution(s));
+            sol.solution(number).ToList().ForEach(_=>Console.WriteLine(_));
+            Console.ReadKey();
+        }
+    }
+
+    public class Solution
+    {
+        public int[] solution(int[] numbers)
+        {
+            int[] answer = new int[] { };
+
+            var oLst = new List<int>();
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                for (int j = 0; j < numbers.Length; j++)
+                {
+                    if (i == j)
+                        continue;
+                    else
+                    {
+                        oLst.Add(numbers[i] + numbers[j]);
+                    }
+                }
+            }
+            oLst.Sort(); //Distinct 뒤에 sort 안 돼서 먼저 Sort 
+            answer = oLst.Distinct().ToArray();
+
+            return answer;
+        }
+    }
+
+}
