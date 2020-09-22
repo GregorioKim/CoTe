@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FibonacciEx
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //int n = 3;
+            int n = 5;
+
+            Solution sol = new Solution();
+            Console.WriteLine(sol.solution(n));
+            Console.ReadKey();
+        }
+    }
+
+    public class Solution
+    {
+        public int solution(int n)
+        {
+            int answer = 0;
+
+            var oLst = new List<int>();
+
+            oLst.Add(0);
+            oLst.Add(1);
+
+            for (int i = 2; i <= n; i++)
+            {
+                oLst.Add(oLst[i - 1] + oLst[i - 2]);
+            }
+
+            answer = oLst.Last() % 1234567 ;
+
+            return answer;
+        }
+    }
+
+}
