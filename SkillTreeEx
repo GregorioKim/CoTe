@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string skill = "CBD";
+            string[] skill_trees = { "BACDE", "CBADF", "AECB", "BDA" };
+            //string[] skill_trees = { "CBADF", "AECB", "BDA" };
+
+            var oSol = new Solution();
+            Console.WriteLine(oSol.solution(skill, skill_trees));
+            Console.ReadKey();
+        }
+    }
+
+/* 선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.
+예를 들어 선행 스킬 순서가 스파크 → 라이트닝 볼트 → 썬더일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고, 라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.
+선행 스킬 순서 skill과 유저들이 만든 스킬트리1를 담은 배열 skill_trees가 매개변수로 주어질 때, 가능한 스킬트리 개수를 return 하는 solution 함수를 작성해주세요. */
+
+    public class Solution
+    {
+        public int solution(string skill, string[] skill_trees)
+        {
+            int answer = 0;
+
+            bool redFlag = false;
+            foreach (var tree in skill_trees)
+            {
+                redFlag = false;
+                for (int i = skill.Length-1; i >= 0 ; i--)
+                {
+                    if (tree.Contains(skill[i].ToString()))
+                    {
+                        int idx = tree.IndexOf(skill[i].ToString());
+                        string subStr = tree.Substring(idx+1);
+                        string preStr = tree.Substring(0, idx);
+                        for (int j = 0; j < i; j++)
+                        {
+                            //if (subStr.Contains(skill[j].ToString()))
+                            if (subStr.Contains(skill[j].ToString()) || 
+                                (preStr != string.Empty && !preStr.Contains(skill[j].ToString())) )
+                            {
+                                redFlag = true;
+                                break;
+                            }
+                        }
+
+                        if (redFlag)
+                            break;
+                    }
+                    if (0 == i)
+                        answer += 1;
+                }
+            }
+
+            return answer;
+        }
+    }
+
+}
