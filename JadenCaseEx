@@ -1,0 +1,44 @@
+using System;
+
+namespace Sep28_JadenCaseEx
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //string s = "3people unFollowed me";
+            string s = "for the last week";
+
+            var oSol = new Solution();
+            Console.WriteLine(oSol.solution(s));
+            Console.ReadKey();
+        }
+    }
+
+    /* JadenCase란 모든 단어의 첫 문자가 대문자이고, 그 외의 알파벳은 소문자인 문자열입니다. 
+       문자열 s가 주어졌을 때, s를 JadenCase로 바꾼 문자열을 리턴하는 함수, solution을 완성해주세요. */
+
+    public class Solution
+    {
+        public string solution(string s)
+        {
+            string answer = "";
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (0 == i || 
+                    (i > 0 && s[i-1].ToString() == " ") )
+                {
+                    answer += s[i].ToString().ToUpper();
+                }
+                else
+                {
+                    answer += s[i].ToString().ToLower();
+                }
+            }
+
+            return answer;
+        }
+    }
+
+}
